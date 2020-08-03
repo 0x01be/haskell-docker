@@ -1,11 +1,8 @@
-FROM alpine:3.12.0 as builder
+FROM 0x01be/alpine:edge as builder
 
 ENV GHC_VERSION 8.10.1
 
-RUN apk add --no-cache --virtual build-dependencies \
-    --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing \
-    --repository http://dl-cdn.alpinelinux.org/alpine/edge/community \
-    --repository http://dl-cdn.alpinelinux.org/alpine/edge/main \
+RUN apk add --no-cache --virtual haskell-build-dependencies \
     git \
     build-base \
     wget \
@@ -52,16 +49,13 @@ RUN cp -L /root/.cabal/bin/stack /opt/stack/bin/
 
 ENV PATH $PATH:/opt/stack/bin/
 
-FROM alpine:3.12.0
+FROM 0x01be/alpine:edge
 
 COPY --from=builder /opt/ghc/ /opt/ghc/
 COPY --from=builder /opt/cabal/ /opt/cabal/
 COPY --from=builder /opt/stack/ /opt/stack/
 
-RUN apk add --no-cache --virtual runtime-dependencies \
-    --repository http://dl-cdn.alpinelinux.org/alpine/edge/testing \
-    --repository http://dl-cdn.alpinelinux.org/alpine/edge/community \
-    --repository http://dl-cdn.alpinelinux.org/alpine/edge/main \
+RUN apk add --no-cache --virtual haskell-runtime-dependencies \
     ncurses \
     gmp-dev \
     build-base \
