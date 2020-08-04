@@ -56,7 +56,7 @@ COPY --from=builder /opt/cabal/ /opt/cabal/
 COPY --from=builder /opt/stack/ /opt/stack/
 
 RUN apk add --no-cache --virtual haskell-runtime-dependencies \
-    ncurses \
+    ncurses-dev \
     gmp-dev \
     build-base \
     binutils-gold
