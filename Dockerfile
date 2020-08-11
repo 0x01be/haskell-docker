@@ -66,3 +66,6 @@ RUN ln -s /usr/lib/libncursesw.so.6 /usr/lib/libtinfo.so.6
  
 ENV PATH $PATH:/opt/ghc/bin/:/opt/cabal/bin/:/opt/stack/bin/
 
+VOLUME /workspace
+WORKDIR /workspace
+
