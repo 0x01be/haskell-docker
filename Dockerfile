@@ -1,4 +1,4 @@
-FROM 0x01be/alpine:edge as builder
+FROM alpine as builder
 
 ENV GHC_VERSION 8.10.1
 
@@ -49,11 +49,12 @@ RUN cp -L /root/.cabal/bin/stack /opt/stack/bin/
 
 ENV PATH $PATH:/opt/stack/bin/
 
-FROM 0x01be/alpine:edge
+FROM alpine
 
 COPY --from=builder /opt/ghc/ /opt/ghc/
 COPY --from=builder /opt/cabal/ /opt/cabal/
 COPY --from=builder /opt/stack/ /opt/stack/
+COPY --from=builder /root/ /root/
 
 RUN apk add --no-cache --virtual haskell-runtime-dependencies \
     ncurses-dev \
