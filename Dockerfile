@@ -60,7 +60,8 @@ RUN apk add --no-cache --virtual haskell-runtime-dependencies \
     ncurses-dev \
     gmp-dev \
     build-base \
-    binutils-gold
+    binutils-gold \
+    wget
 
 RUN ln -s /usr/lib/libncursesw.so.6 /usr/lib/libtinfo.so.6
  
