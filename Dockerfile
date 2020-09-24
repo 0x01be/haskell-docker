@@ -1,6 +1,6 @@
 FROM alpine as builder
 
-ENV GHC_VERSION 8.10.1
+ENV GHC_VERSION 8.10.2
 
 RUN apk add --no-cache --virtual haskell-build-dependencies \
     git \
